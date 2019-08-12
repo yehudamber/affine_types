@@ -449,6 +449,8 @@ struct is_affine_displacement : std::false_type {};
 template <typename T, typename Tag>
 struct is_affine_displacement<affine::displacement<T, Tag>> : std::true_type {};
 
+#include <affine_combination.hpp>
+
 int main()
 {
   dq<int> q{3,4,5};
@@ -463,5 +465,12 @@ int main()
   assert(d == dq<int>::difference_type {1});
   *i = 1;
   assert(*++b == 1);
+
+  using IntPos = affine::position<int, class IntTag>;
+  auto p1 = IntPos { 5 };
+  auto p2 = IntPos { 9 };
+  auto mid = IntPos { affine::weighted<std::ratio<1,2>>(p1) + affine::weighted<std::ratio<1,2>>(p2) };
+  assert(mid == IntPos { 7 });
+
   std::puts("Cool!");
 }

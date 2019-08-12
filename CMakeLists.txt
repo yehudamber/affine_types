@@ -23,6 +23,7 @@ target_link_libraries(self_test PRIVATE affine_types)
 install(
         FILES
           include/affine_types.hpp
+		  include/affine_combination.hpp
         DESTINATION
           ${CMAKE_INSTALL_INCLUDEDIR}
 )
